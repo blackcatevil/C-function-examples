@@ -1,0 +1,124 @@
+btxectezhralmduw
+
+// FRU Info 
+busctl introspect xyz.openbmc_project.FruDevice
+
+git remote add gerrit ssh://blackcatevil@gerrit.openbmc-project.xyz:29418/openbmc/[openbmc_repo]
+git config remote.gerrit.push HEAD:refs/for/master
+gitdir=$(git rev-parse --git-dir)
+scp -p -P 29418 openbmc.gerrit:hooks/commit-msg ${gitdir}/hooks
+git commit -s
+git push gerrit
+
+busctl call --verbose xyz.openbmc_project.ObjectMapper /xyz/openbmc_project/object_mapper xyz.openbmc_project.ObjectMapper GetSubTree sias "/" 0 1 xyz.openbmc_project.Configuration.AspeedPWMFan
+busctl set-property xyz.openbmc_project.Software.BMC.Updater \
+  /xyz/openbmc_project/software/8ee12687 \
+  xyz.openbmc_project.Software.Activation RequestedActivation s \
+  xyz.openbmc_project.Software.Activation.RequestedActivations.Active
+  
+busctl get-property xyz.openbmc_project.Software.BMC.Updater \
+  /xyz/openbmc_project/software/8ee12687 \
+  xyz.openbmc_project.Software.Activation Activation
+  
+  bitbake <recipe> -ne <file>
+  
+  scripts/checkpatch.pl --strict <patch>
+  scripts/get_maintainer.pl -f <patch>
+  git send-email -v<version> -1 --to=howard.chiu@quantatw.com
+
+# HSC
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/P12V_AUX_HSC_Output_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/P12V_AUX_HSC_Input_Voltage  xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/current/P12V_AUX_HSC_Output_Current xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/power/P12V_AUX_HSC_Input_Power xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED0_HSC_Output_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED0_HSC_Input_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/current/SLED0_HSC_Output_Current xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/power/SLED0_HSC_Input_Power xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED1_HSC_Output_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED1_HSC_Input_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/current/SLED1_HSC_Output_Current xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/power/SLED1_HSC_Input_Power xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED2_HSC_Output_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED2_HSC_Input_Voltage xyz.openbmc_project.Sensor.Value 
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/current/SLED2_HSC_Output_Current xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/power/SLED2_HSC_Input_Power xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED3_HSC_Output_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED3_HSC_Input_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/current/SLED3_HSC_Output_Current xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/power/SLED3_HSC_Input_Power xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED4_HSC_Output_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED4_HSC_Input_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/current/SLED4_HSC_Output_Current xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/power/SLED4_HSC_Input_Power xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED5_HSC_Output_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/voltage/SLED5_HSC_Input_Voltage xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/current/SLED5_HSC_Output_Current xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.PSUSensor /xyz/openbmc_project/sensors/power/SLED5_HSC_Input_Power xyz.openbmc_project.Sensor.Value
+
+# ADC
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/IMON_FAN0 xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/IMON_FAN1 xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/IMON_FAN2 xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/IMON_FAN3 xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P12V_FAN0 xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P12V_FAN1 xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P12V_FAN2 xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P12V_FAN3 xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P12V_AUX xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P1V0_AUX xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P1V2_AUX xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P1V8_AUX xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P2V5_AUX xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P3V3_AUX xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P3V_BAT xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/P5V_AUX xyz.openbmc_project.Sensor.Value
+
+# Temperature
+busctl introspect xyz.openbmc_project.HwmonTempSensor /xyz/openbmc_project/sensors/temperature/MB_U19_THERM_LOCAL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.HwmonTempSensor /xyz/openbmc_project/sensors/temperature/MB_U402_THERM_LOCAL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.HwmonTempSensor /xyz/openbmc_project/sensors/temperature/MB_U72_THERM_LOCAL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.HwmonTempSensor /xyz/openbmc_project/sensors/temperature/MB_U72_THERM_REMOTE xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.HwmonTempSensor /xyz/openbmc_project/sensors/temperature/MB_U73_THERM_LOCAL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.HwmonTempSensor /xyz/openbmc_project/sensors/temperature/MB_U73_THERM_REMOTE xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.NVMeSensor /xyz/openbmc_project/sensors/temperature/SLED0_NVMe_SSD xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.NVMeSensor /xyz/openbmc_project/sensors/temperature/SLED1_NVMe_SSD xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.NVMeSensor /xyz/openbmc_project/sensors/temperature/SLED2_NVMe_SSD xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.NVMeSensor /xyz/openbmc_project/sensors/temperature/SLED3_NVMe_SSD xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.NVMeSensor /xyz/openbmc_project/sensors/temperature/SLED4_NVMe_SSD xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.NVMeSensor /xyz/openbmc_project/sensors/temperature/SLED5_NVMe_SSD xyz.openbmc_project.Sensor.Value
+
+busctl introspect xyz.openbmc_project.ExternalSensor /xyz/openbmc_project/sensors/temperature/FRONT_THERM xyz.openbmc_project.Sensor.Value
+
+# Tachometer
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL xyz.openbmc_project.Sensor.Value
+busctl introspect xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL xyz.openbmc_project.Sensor.Value
+
+# PWM
+busctl set-property xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_pwm/Pwm_1 xyz.openbmc_project.Sensor.Value Value d 20
+busctl set-property xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_pwm/Pwm_2 xyz.openbmc_project.Sensor.Value Value d 20
+busctl set-property xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_pwm/Pwm_3 xyz.openbmc_project.Sensor.Value Value d 20
+busctl set-property xyz.openbmc_project.FanSensor /xyz/openbmc_project/sensors/fan_pwm/Pwm_4 xyz.openbmc_project.Sensor.Value Value d 20
+
+busctl set-property xyz.openbmc_project.LED.GroupManager /xyz/openbmc_project/led/groups/sys_identify xyz.openbmc_project.Led.Group Asserted b true
+
+# BMC version
+cat /etc/os-release
+
+git send-email -v7 -1 --to=robh+dt@kernel.org --to=joel@jms.id.au --to=andrew@aj.id.au --to=devicetree@vger.kernel.org --to=linux-arm-kernel@lists.infradead.org --to=linux-aspeed@lists.ozlabs.org --to=linux-kernel@vger.kernel.org --to=patrick@stwcx.xyz --to=Potin.Lai@quantatw.com
+
